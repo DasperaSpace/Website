@@ -5,13 +5,13 @@
 }
 
 @font-face {
-    font-family: "Roboto";
-    src: url("Roboto-Light.woff") format('woff');
+  font-family: "Roboto";
+  src: url("Roboto-Light.woff") format('woff');
+  font-display: auto;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
-  font-display: auto;
 }
 
 header {
