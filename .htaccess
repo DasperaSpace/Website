@@ -3,6 +3,23 @@ RewriteEngine On
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
+# Security Headers
+<IfModule mod_headers.c>
+	Header set X-XSS-Protection "1; mode=block"
+	Header set X-Frame-Options "SAMEORIGIN"
+	Header set X-Content-Type-Options "nosniff"
+	Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+	# Header set Content-Security-Policy ...
+	Header set Referrer-Policy "same-origin"
+	Header set Feature-Policy "geolocation 'self'; vibrate 'none'"
+        Header set Permissions-Policy "geolocation=self"
+        Header set Content-Security-Policy "default-src https:; font-src https: data:; img-src https: data:; script-src https:; style-src https:;"
+</IfModule>
+
+Header unset Pragma
+Header unset Last-Modified
+Header unset Cache-Control
+
 # Expire headers  
 <IfModule mod_expires.c>  
   # Turn on the module.
